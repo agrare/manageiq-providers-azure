@@ -160,7 +160,7 @@ describe ManageIQ::Providers::Azure::CloudManager::Refresher do
       end
 
       it "will refresh orchestration stack" do
-        stack_resource_id = "/subscriptions/2586c64b-38b4-4527-a140-012d49dfc02c/resourceGroups/miq-azure-test1/providers/Microsoft.Resources/deployments/spec-deployment-dont-delete"
+        stack_resource_id = "/subscriptions/AZURE_SUBSCRIPTION_ID/resourceGroups/miq-azure-test1/providers/Microsoft.Resources/deployments/spec-deployment-dont-delete"
 
         stack_target = ManagerRefresh::Target.new(:manager     => @ems,
                                                   :association => :orchestration_stacks,
@@ -174,13 +174,13 @@ describe ManageIQ::Providers::Azure::CloudManager::Refresher do
       end
 
       it "will refresh orchestration stack followed by Vm refresh" do
-        stack_resource_id = "/subscriptions/2586c64b-38b4-4527-a140-012d49dfc02c/resourceGroups/miq-azure-test1/providers/Microsoft.Resources/deployments/spec-deployment-dont-delete"
+        stack_resource_id = "/subscriptions/AZURE_SUBSCRIPTION_ID/resourceGroups/miq-azure-test1/providers/Microsoft.Resources/deployments/spec-deployment-dont-delete"
 
         stack_target = ManagerRefresh::Target.new(:manager     => @ems,
                                                   :association => :orchestration_stacks,
                                                   :manager_ref => {:ems_ref => stack_resource_id})
 
-        vm_resource_id = "2586c64b-38b4-4527-a140-012d49dfc02c\\miq-azure-test1\\microsoft.compute/virtualmachines\\spec0deply1vm0"
+        vm_resource_id = "AZURE_SUBSCRIPTION_ID\\miq-azure-test1\\microsoft.compute/virtualmachines\\spec0deply1vm0"
         vm_target = ManagerRefresh::Target.new(:manager     => @ems,
                                                :association => :vms,
                                                :manager_ref => {:ems_ref => vm_resource_id})
@@ -196,18 +196,18 @@ describe ManageIQ::Providers::Azure::CloudManager::Refresher do
       end
 
       it "will refresh orchestration stack with vms" do
-        stack_resource_id = "/subscriptions/2586c64b-38b4-4527-a140-012d49dfc02c/resourceGroups/miq-azure-test1/providers/Microsoft.Resources/deployments/spec-deployment-dont-delete"
+        stack_resource_id = "/subscriptions/AZURE_SUBSCRIPTION_ID/resourceGroups/miq-azure-test1/providers/Microsoft.Resources/deployments/spec-deployment-dont-delete"
 
         stack_target = ManagerRefresh::Target.new(:manager     => @ems,
                                                   :association => :orchestration_stacks,
                                                   :manager_ref => {:ems_ref => stack_resource_id})
 
-        vm_resource_id1 = "2586c64b-38b4-4527-a140-012d49dfc02c\\miq-azure-test1\\microsoft.compute/virtualmachines\\spec0deply1vm0"
+        vm_resource_id1 = "AZURE_SUBSCRIPTION_ID\\miq-azure-test1\\microsoft.compute/virtualmachines\\spec0deply1vm0"
         vm_target1      = ManagerRefresh::Target.new(:manager     => @ems,
                                                      :association => :vms,
                                                      :manager_ref => {:ems_ref => vm_resource_id1})
 
-        vm_resource_id2 = "2586c64b-38b4-4527-a140-012d49dfc02c\\miq-azure-test1\\microsoft.compute/virtualmachines\\spec0deply1vm1"
+        vm_resource_id2 = "AZURE_SUBSCRIPTION_ID\\miq-azure-test1\\microsoft.compute/virtualmachines\\spec0deply1vm1"
         vm_target2      = ManagerRefresh::Target.new(:manager     => @ems,
                                                      :association => :vms,
                                                      :manager_ref => {:ems_ref => vm_resource_id2})
@@ -220,13 +220,13 @@ describe ManageIQ::Providers::Azure::CloudManager::Refresher do
       end
 
       it "will refresh orchestration stack followed by LoadBalancer refresh" do
-        stack_resource_id = "/subscriptions/2586c64b-38b4-4527-a140-012d49dfc02c/resourceGroups/miq-azure-test1/providers/Microsoft.Resources/deployments/spec-deployment-dont-delete"
+        stack_resource_id = "/subscriptions/AZURE_SUBSCRIPTION_ID/resourceGroups/miq-azure-test1/providers/Microsoft.Resources/deployments/spec-deployment-dont-delete"
 
         stack_target = ManagerRefresh::Target.new(:manager     => @ems,
                                                   :association => :orchestration_stacks,
                                                   :manager_ref => {:ems_ref => stack_resource_id})
 
-        lb_resource_id = "/subscriptions/2586c64b-38b4-4527-a140-012d49dfc02c/resourceGroups/miq-azure-test1/providers/Microsoft.Network/loadBalancers/spec0deply1lb"
+        lb_resource_id = "/subscriptions/AZURE_SUBSCRIPTION_ID/resourceGroups/miq-azure-test1/providers/Microsoft.Network/loadBalancers/spec0deply1lb"
         lb_target = ManagerRefresh::Target.new(:manager     => @ems,
                                                :association => :load_balancers,
                                                :manager_ref => {:ems_ref => lb_resource_id})
@@ -242,7 +242,7 @@ describe ManageIQ::Providers::Azure::CloudManager::Refresher do
       end
 
       it "will refresh LoadBalancer created by stack" do
-        lb_resource_id = "/subscriptions/2586c64b-38b4-4527-a140-012d49dfc02c/resourceGroups/miq-azure-test1/providers/Microsoft.Network/loadBalancers/spec0deply1lb"
+        lb_resource_id = "/subscriptions/AZURE_SUBSCRIPTION_ID/resourceGroups/miq-azure-test1/providers/Microsoft.Network/loadBalancers/spec0deply1lb"
         lb_target = ManagerRefresh::Target.new(:manager     => @ems,
                                                :association => :load_balancers,
                                                :manager_ref => {:ems_ref => lb_resource_id})
@@ -354,12 +354,12 @@ describe ManageIQ::Providers::Azure::CloudManager::Refresher do
       end
 
       def lbs_vms_targets
-        vm_resource_id1 = "2586c64b-38b4-4527-a140-012d49dfc02c\\miq-azure-test1\\microsoft.compute/virtualmachines\\rspec-lb-a"
+        vm_resource_id1 = "AZURE_SUBSCRIPTION_ID\\miq-azure-test1\\microsoft.compute/virtualmachines\\rspec-lb-a"
         vm_target1      = ManagerRefresh::Target.new(:manager     => @ems,
                                                      :association => :vms,
                                                      :manager_ref => {:ems_ref => vm_resource_id1})
 
-        vm_resource_id2 = "2586c64b-38b4-4527-a140-012d49dfc02c\\miq-azure-test1\\microsoft.compute/virtualmachines\\rspec-lb-b"
+        vm_resource_id2 = "AZURE_SUBSCRIPTION_ID\\miq-azure-test1\\microsoft.compute/virtualmachines\\rspec-lb-b"
         vm_target2      = ManagerRefresh::Target.new(:manager     => @ems,
                                                      :association => :vms,
                                                      :manager_ref => {:ems_ref => vm_resource_id2})
