@@ -194,7 +194,7 @@ class ManageIQ::Providers::Azure::Inventory::Collector::TargetCollection < Manag
 
     set = Set.new(refs)
 
-    collect_inventory_targeted(:private_images) { gather_data_for_this_region(@sas, 'list_all_private_images') }.select do |image|
+    collect_inventory_targeted(:private_images) { @sas.list_all_private_images(:location => @ems.provider_region) }.select do |image|
       set.include?(image.uri)
     end
   rescue ::Azure::Armrest::Exception => err

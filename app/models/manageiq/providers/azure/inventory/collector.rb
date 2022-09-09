@@ -262,7 +262,7 @@ class ManageIQ::Providers::Azure::Inventory::Collector < ManageIQ::Providers::In
   # that it doesn't affect the rest of inventory collection.
   #
   def images
-    collect_inventory(:private_images) { gather_data_for_this_region(@sas, 'list_all_private_images') }
+    collect_inventory(:private_images) { @sas.list_all_private_images(:location => @ems.provider_region) }
   rescue ::Azure::Armrest::ApiException => err
     _log.warn("Unable to collect Azure private images for: [#{@ems.name}] - [#{@ems.id}]: #{err.message}")
     []

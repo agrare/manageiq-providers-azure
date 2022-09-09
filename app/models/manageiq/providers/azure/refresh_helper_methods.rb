@@ -72,8 +72,6 @@ module ManageIQ::Providers::Azure::RefreshHelperMethods
       arm_service.send(method_name).select do |resource|
         resource.try(:location).try(:casecmp, @ems.provider_region).zero?
       end.flatten
-    elsif method_name.to_s == 'list_all_private_images' # requires special handling
-      arm_service.send(method_name, :location => @ems.provider_region)
     else
       get_resource_groups.collect do |resource_group|
         arm_service.send(method_name, resource_group.name).select do |resource|
